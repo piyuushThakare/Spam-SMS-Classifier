@@ -1,0 +1,252 @@
+.result {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.spam {
+    color: #d32f2f;
+}
+
+.ham {
+    color: #2e7d32;
+}
+/* ✨ Floating Particles */
+.particles {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.particles span {
+    position: absolute;
+    display: block;
+    width: 14px;
+    height: 14px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    animation: floatParticle 30s linear infinite;
+    filter: blur(1px);
+}
+
+/* Individual particle variations */
+.particles span:nth-child(1) { left: 10%; animation-duration: 28s; width: 8px; height: 8px; }
+.particles span:nth-child(2) { left: 20%; animation-duration: 34s; }
+.particles span:nth-child(3) { left: 35%; animation-duration: 26s; width: 6px; height: 6px; }
+.particles span:nth-child(4) { left: 50%; animation-duration: 40s; }
+.particles span:nth-child(5) { left: 65%; animation-duration: 30s; width: 10px; height: 10px; }
+.particles span:nth-child(6) { left: 75%; animation-duration: 36s; }
+.particles span:nth-child(7) { left: 85%; animation-duration: 24s; width: 7px; height: 7px; }
+.particles span:nth-child(8) { left: 90%; animation-duration: 42s; }
+.particles span:nth-child(9) { left: 30%; animation-duration: 38s; }
+.particles span:nth-child(10){ left: 55%; animation-duration: 32s; }
+
+@keyframes floatParticle {
+    0% {
+        transform: translateY(110vh) scale(0.8);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.6;
+    }
+    90% {
+        opacity: 0.6;
+    }
+    100% {
+        transform: translateY(-10vh) scale(1.2);
+        opacity: 0;
+    }
+}
+/* 🔄 Loading Button Animation */
+.analyze-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-loader {
+    display: none;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(0, 0, 0, 0.3);
+    border-top: 3px solid #000;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto;
+}
+
+.analyze-btn.loading {
+    pointer-events: none;
+    opacity: 0.85;
+}
+
+.analyze-btn.loading .btn-text {
+    display: none;
+}
+
+.analyze-btn.loading .btn-loader {
+    display: inline-block;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+/* =========================
+   🤖 AI ROBOT MASCOT
+   ========================= */
+
+.app-wrapper {
+    position: relative;
+}
+
+/* Bot container */
+.ai-bot {
+    position: absolute;
+    top: 50%;
+    left: calc(50% - 380px); /* left side of card */
+    transform: translateY(-50%);
+    z-index: 20;
+    pointer-events: none;
+}
+
+/* Robot image */
+.ai-bot img {
+    width: 200px;
+    height: auto;
+    animation: floatBot 5s ease-in-out infinite;
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.35));
+}
+
+/* Floating + subtle rotation */
+@keyframes floatBot {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-12px) rotate(5deg);
+    }
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+}
+/* =========================
+   🤖 ROBOT REACTIONS
+   ========================= */
+
+/* Default */
+.ai-bot img {
+    transition: all 0.4s ease;
+}
+
+/* 😄 HAM (Not Spam) */
+body.ham .ai-bot img {
+    transform: scale(1.05) rotate(3deg);
+    filter: drop-shadow(0 0 25px rgba(0, 255, 150, 0.6));
+}
+
+/* 😡 SPAM */
+body.spam .ai-bot img {
+    transform: scale(1.05) rotate(-5deg);
+    filter: drop-shadow(0 0 25px rgba(255, 60, 60, 0.8));
+}
+/* 💬 Speech Bubble */
+.bot-speech {
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.7);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 14px;
+    font-size: 12px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    white-space: nowrap;
+}
+
+/* Show bubble after result */
+body.ham .bot-speech,
+body.spam .bot-speech {
+    opacity: 1;
+}
+/* Force robot reaction */
+body.spam .ai-bot img {
+    transform: scale(1.08) rotate(-6deg) !important;
+    filter: drop-shadow(0 0 30px rgba(255, 50, 50, 0.9)) !important;
+}
+
+body.ham .ai-bot img {
+    transform: scale(1.08) rotate(6deg) !important;
+    filter: drop-shadow(0 0 30px rgba(0, 255, 150, 0.9)) !important;
+}
+
+
+/* =========================
+   🔔 RESULT STATUS TAB
+   ========================= */
+
+.result-tab {
+    margin-bottom: 18px;
+    padding: 14px 16px;
+    border-radius: 16px;
+    animation: slideDown 0.4s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Text */
+.result-text {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+/* Confidence bar */
+.confidence-bar {
+    width: 100%;
+    height: 8px;
+    background: rgba(255,255,255,0.25);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.confidence-fill {
+    height: 100%;
+    border-radius: 10px;
+    transition: width 0.6s ease;
+}
+
+/* Label */
+.confidence-label {
+    margin-top: 6px;
+    font-size: 12px;
+    opacity: 0.85;
+}
+
+/* Spam */
+.spam-tab {
+    background: rgba(220, 53, 69, 0.25);
+}
+
+.spam-tab .confidence-fill {
+    background: linear-gradient(90deg, #ff4d4d, #ff0000);
+}
+
+/* Ham */
+.ham-tab {
+    background: rgba(25, 135, 84, 0.25);
+}
+
+.ham-tab .confidence-fill {
+    background: linear-gradient(90deg, #2ecc71, #27ae60);
+}
